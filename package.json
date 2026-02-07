@@ -1,5 +1,5 @@
 {
-  "name": "c-users-matthew-documents-3dfp-website-webdev",
+  "name": "3dfp-website",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -8,10 +8,13 @@
     "preview": "astro preview",
     "astro": "astro"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
     "@astrojs/tailwind": "^6.0.2",
-    "@astrojs/vercel": "^8.0.4",
+    "@astrojs/vercel": "^9.0.4",
     "@formspree/react": "^3.0.0",
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
