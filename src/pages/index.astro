@@ -146,7 +146,7 @@ const images = import.meta.glob('/src/assets/SampleRenders/*.{jpeg,jpg,png,gif,w
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         btn.disabled = true;
-        btn.innerText = "Processing Blueprints...";
+        btn.innerText = "Sending request...";
 
         const formData = new FormData(form);
 
