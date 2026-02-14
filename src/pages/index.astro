@@ -3,9 +3,31 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 
 const images = import.meta.glob('/src/assets/SampleRenders/*.{jpeg,jpg,png,gif,webp}');
+
+// SEO Metadata (Hidden from view)
+const title = "3D Floor Plans | Engineer-Led Architectural Modeling Sydney";
+const description = "Transforming 2D blueprints into photorealistic 3D experiences for Sydney architects and real estate agents. 100% scale accuracy with 4K renders.";
 ---
 
-<Layout title="3D Floor Plans | Engineer-Led Architectural Modeling">
+<Layout title={title}>
+    <head>
+        <meta name="description" content={description} />
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          "name": "3DFloorPlans.com.au",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Sutherland",
+            "addressRegion": "NSW",
+            "addressCountry": "AU"
+          },
+          "description": "Engineer-led 3D floor plan conversion and architectural visualization in Sydney.",
+          "areaServed": "Sydney, NSW"
+        }
+        </script>
+    </head>
     
     <nav class="fixed w-full z-50 top-0 bg-white/80 backdrop-blur-md border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -42,32 +64,36 @@ const images = import.meta.glob('/src/assets/SampleRenders/*.{jpeg,jpg,png,gif,w
             </div>
         </section>
 
-		<section class="bg-white border-y border-slate-200 py-12 mb-24">
-			<div class="max-w-7xl mx-auto px-6 flex flex-wrap md:grid md:grid-cols-3 justify-center gap-8 text-center">
-				<div>
-					<p class="text-3xl font-bold text-slate-900">3-4 days</p>
-					<p class="text-sm text-slate-500 uppercase tracking-widest mt-1">Typical Turnaround</p>
-				</div>
-				<div>
-					<p class="text-3xl font-bold text-slate-900">100%</p>
-					<p class="text-sm text-slate-500 uppercase tracking-widest mt-1">Scale Accuracy*</p>
-				</div>
-				<div>
-					<p class="text-3xl font-bold text-slate-900">AU</p>
-					<p class="text-sm text-slate-500 uppercase tracking-widest mt-1">Direct Support</p>
-				</div>
-			</div>
-		</section>
+        <section class="bg-white border-y border-slate-200 py-12 mb-24">
+            <div class="max-w-7xl mx-auto px-6 flex flex-wrap md:grid md:grid-cols-4 justify-center gap-8 text-center">
+                <div>
+                    <p class="text-3xl font-bold text-slate-900">3-4 days</p>
+                    <p class="text-sm text-slate-500 uppercase tracking-widest mt-1">Typical Turnaround</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold text-slate-900">100%</p>
+                    <p class="text-sm text-slate-500 uppercase tracking-widest mt-1">Scale Accuracy*</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold text-slate-900">4K</p>
+                    <p class="text-sm text-slate-500 uppercase tracking-widest mt-1">Render Quality</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold text-slate-900">AU</p>
+                    <p class="text-sm text-slate-500 uppercase tracking-widest mt-1">Direct Support</p>
+                </div>
+            </div>
+        </section>
 
         <section id="showcase" class="max-w-7xl mx-auto px-6 mb-32">
-			<div class="mb-12 border-l-4 border-blue-600 pl-6">
-				<h2 class="text-4xl font-black text-slate-900 tracking-tight uppercase">
-					Project Showcase
-				</h2>
-				<p class="text-lg text-slate-500 mt-2">
-					A gallery of our recent architectural visualizations and precision 3D floor plans.
-				</p>
-			</div>
+            <div class="mb-12 border-l-4 border-blue-600 pl-6">
+                <h2 class="text-4xl font-black text-slate-900 tracking-tight uppercase">
+                    Project Showcase
+                </h2>
+                <p class="text-lg text-slate-500 mt-2">
+                    A gallery of our recent architectural visualizations and precision 3D floor plans.
+                </p>
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {Object.entries(images).map(([path, importImage], index) => (
@@ -77,7 +103,7 @@ const images = import.meta.glob('/src/assets/SampleRenders/*.{jpeg,jpg,png,gif,w
                   >
                     <Image 
                       src={importImage()} 
-                      alt="Precision 3D Floor Plan Render" 
+                      alt={`Precision 3D Floor Plan Rendering Sydney project ${index + 1}`} 
                       class="gallery-thumb object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                     />
                     <div class="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -111,72 +137,71 @@ const images = import.meta.glob('/src/assets/SampleRenders/*.{jpeg,jpg,png,gif,w
             <div id="gallery-counter" class="absolute bottom-8 text-slate-900/40 font-mono text-sm tracking-widest">01 / 00</div>
         </div>
 
-		<section id="services-process" class="max-w-7xl mx-auto px-6 mb-32">
-    
-			<div class="mb-20">
-				<div class="mb-12 border-l-4 border-blue-600 pl-6">
-					<h2 class="text-4xl font-black text-slate-900 tracking-tight uppercase">Our Services</h2>
-					<p class="text-lg text-slate-500 mt-2">Professional visualization for architecture and real estate.</p>
-				</div>
-				
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-					<div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 transition-all hover:shadow-xl hover:shadow-slate-200/50">
-						<h3 class="text-xl font-bold text-slate-900 mb-4">2D to 3D Conversion</h3>
-						<p class="text-slate-600 leading-relaxed text-sm">
-							Our core service transforms existing floorplans into high quality 3D floor plans. Delivered as a crisp, top-down render, these models provide the spatial context 2D plans cannot match.
-						</p>
-					</div>
-		
-					<div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 transition-all hover:shadow-xl hover:shadow-slate-200/50">
-						<h3 class="text-xl font-bold text-slate-900 mb-4">Custom Renders</h3>
-						<p class="text-slate-600 leading-relaxed text-sm">
-							For more complicated or specific requirements, we offer bespoke modeling and site-specific textures. We can also provide the 3D model files for clients who wish to integrate them into their own internal pipelines.
-						</p>
-					</div>
-		
-					<div class="bg-blue-600 p-8 rounded-3xl text-white shadow-xl shadow-blue-100">
-						<h3 class="text-xl font-bold mb-4">Complimentary Branding</h3>
-						<p class="text-blue-50 leading-relaxed text-sm">
-							Every project includes complimentary branding and theme integration. We match your agency's color palette and include your logo on the final outputs to ensure a seamless fit for your marketing materials.
-						</p>
-					</div>
-				</div>
-			</div>
-		
-			<div class="bg-slate-900 rounded-[3rem] p-10 md:p-16 text-white relative overflow-hidden">
-				<div class="max-w-3xl mx-auto">
-					<h2 class="text-3xl font-bold mb-4 text-center">The Precision Process</h2>
-					
-					<div class="space-y-12 relative">
-						<div class="absolute left-[19px] top-2 bottom-2 w-px bg-slate-800"></div>
-		
-						<div class="relative pl-14">
-							<div class="absolute left-0 top-1 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold shadow-[0_0_20px_rgba(37,99,235,0.4)]">1</div>
-							<h4 class="font-bold text-xl mb-1 text-white">Submit Your Floorplan</h4>
-							<p class="text-slate-400 leading-relaxed">Upload your 2D floorplan via our quote request form. We accept PDF, PNG, and JPG formats.</p>
-						</div>
-		
-						<div class="relative pl-14">
-							<div class="absolute left-0 top-1 w-10 h-10 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-sm font-bold">3</div>
-							<h4 class="font-bold text-xl mb-1 text-white">Initial Draft (3-4 Days)</h4>
-							<p class="text-slate-400 leading-relaxed">We deliver a 3D draft within 3 to 4 business days. This allows you to visualize the spatial layout and provide initial feedback.</p>
-						</div>
-		
-						<div class="relative pl-14">
-							<div class="absolute left-0 top-1 w-10 h-10 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-sm font-bold">4</div>
-							<h4 class="font-bold text-xl mb-1 text-white">Collaborative Revisions</h4>
-							<p class="text-slate-400 leading-relaxed">We include up to 3 rounds of revisions as a standard part of our service.</p>
-						</div>
-		
-						<div class="relative pl-14">
-							<div class="absolute left-0 top-1 w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold">5</div>
-							<h4 class="font-bold text-xl mb-1 text-white">Final Delivery</h4>
-							<p class="text-slate-400 leading-relaxed">Upon approval, we deliver your 3D floor plan renders, fully branded and ready for use in your listings.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+        <section id="services-process" class="max-w-7xl mx-auto px-6 mb-32">
+            <div class="mb-20">
+                <div class="mb-12 border-l-4 border-blue-600 pl-6">
+                    <h2 class="text-4xl font-black text-slate-900 tracking-tight uppercase">Our Services</h2>
+                    <p class="text-lg text-slate-500 mt-2">Professional visualization for architecture and real estate.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 transition-all hover:shadow-xl hover:shadow-slate-200/50">
+                        <h3 class="text-xl font-bold text-slate-900 mb-4">2D to 3D Conversion</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            Our core service transforms existing floorplans into high quality 3D floor plans. Delivered as a crisp, top-down render, these models provide the spatial context 2D plans cannot match.
+                        </p>
+                    </div>
+        
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 transition-all hover:shadow-xl hover:shadow-slate-200/50">
+                        <h3 class="text-xl font-bold text-slate-900 mb-4">Custom Renders</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            For more complicated or specific requirements, we offer bespoke modeling and site-specific textures. We can also provide the 3D model files for clients who wish to integrate them into their own internal pipelines.
+                        </p>
+                    </div>
+        
+                    <div class="bg-blue-600 p-8 rounded-3xl text-white shadow-xl shadow-blue-100">
+                        <h3 class="text-xl font-bold mb-4">Complimentary Branding</h3>
+                        <p class="text-blue-50 leading-relaxed text-sm">
+                            Every project includes complimentary branding and theme integration. We match your agency's color palette and include your logo on the final outputs to ensure a seamless fit for your marketing materials.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="bg-slate-900 rounded-[3rem] p-10 md:p-16 text-white relative overflow-hidden">
+                <div class="max-w-3xl mx-auto">
+                    <h2 class="text-3xl font-bold mb-4 text-center">The Precision Process</h2>
+                    
+                    <div class="space-y-12 relative">
+                        <div class="absolute left-[19px] top-2 bottom-2 w-px bg-slate-800"></div>
+        
+                        <div class="relative pl-14">
+                            <div class="absolute left-0 top-1 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold shadow-[0_0_20px_rgba(37,99,235,0.4)]">1</div>
+                            <h4 class="font-bold text-xl mb-1 text-white">Submit Your Floorplan</h4>
+                            <p class="text-slate-400 leading-relaxed">Upload your 2D floorplan via our quote request form. We accept PDF, PNG, and JPG formats.</p>
+                        </div>
+        
+                        <div class="relative pl-14">
+                            <div class="absolute left-0 top-1 w-10 h-10 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                            <h4 class="font-bold text-xl mb-1 text-white">Initial Draft (3-4 Days)</h4>
+                            <p class="text-slate-400 leading-relaxed">We deliver a 3D draft within 3 to 4 business days. This allows you to visualize the spatial layout and provide initial feedback.</p>
+                        </div>
+        
+                        <div class="relative pl-14">
+                            <div class="absolute left-0 top-1 w-10 h-10 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                            <h4 class="font-bold text-xl mb-1 text-white">Collaborative Revisions</h4>
+                            <p class="text-slate-400 leading-relaxed">We include up to 3 rounds of revisions as a standard part of our service.</p>
+                        </div>
+        
+                        <div class="relative pl-14">
+                            <div class="absolute left-0 top-1 w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold">4</div>
+                            <h4 class="font-bold text-xl mb-1 text-white">Final Delivery</h4>
+                            <p class="text-slate-400 leading-relaxed">Upon approval, we deliver your 3D floor plan renders, fully branded and ready for use in your listings.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="contact" class="max-w-4xl mx-auto px-6 mb-32 text-slate-900">
             <div class="bg-blue-600 rounded-[2rem] p-12 text-center text-white relative overflow-hidden">
@@ -211,13 +236,13 @@ const images = import.meta.glob('/src/assets/SampleRenders/*.{jpeg,jpg,png,gif,w
             </div>
         </section>
 
-		<section class="max-w-7xl mx-auto px-6 py-4">
-			<div class="border-t border-slate-200 pt-4">
-				<p class="text-xs text-slate-500 leading-relaxed">
-					<span class="font-bold">*Technical Disclaimer:</span> 3D models are generated using engineer-validated coordinate snapping to ensure 1:1 scale fidelity. However, final spatial accuracy is strictly dependent on the precision and technical detail of the floor plans provided by the client.
-				</p>
-			</div>
-		</section>
+        <section class="max-w-7xl mx-auto px-6 py-4">
+            <div class="border-t border-slate-200 pt-4">
+                <p class="text-xs text-slate-500 leading-relaxed">
+                    <span class="font-bold">*Technical Disclaimer:</span> 3D models are generated using engineer-validated coordinate snapping to ensure 1:1 scale fidelity. However, final spatial accuracy is strictly dependent on the precision and technical detail of the floor plans provided by the client.
+                </p>
+            </div>
+        </section>
     </main>
 
     <footer class="bg-slate-900 text-slate-400 py-10 px-6 border-t border-slate-800">
