@@ -20,7 +20,7 @@ const images = import.meta.glob('/src/assets/SampleRenders/*.{jpeg,jpg,png,gif,w
             </button>
     
             <div id="nav-links" class="hidden absolute top-16 left-0 w-full bg-white border-b border-slate-200 p-6 flex-col space-y-4 md:static md:flex md:flex-row md:items-center md:space-y-0 md:space-x-8 md:p-0 md:border-none md:bg-transparent md:w-auto">
-                <a href="#portfolio" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Portfolio</a>
+                <a href="#showcase" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Showcase</a>
                 <a href="#contact" class="bg-slate-900 text-white px-5 py-2 rounded-full text-sm font-medium text-center hover:bg-slate-800 transition-all">
                     Get a Quote
                 </a>
@@ -37,7 +37,7 @@ const images = import.meta.glob('/src/assets/SampleRenders/*.{jpeg,jpg,png,gif,w
                 Transforming 2D blueprints into photorealistic 3D experiences. We provide architects and real estate agents with the visual edge needed to close deals faster.
             </p>
             <div class="flex flex-col md:flex-row justify-center gap-4">
-                <a href="#portfolio" class="px-8 py-4 bg-slate-900 text-white rounded-xl font-bold text-lg shadow-xl shadow-slate-200 hover:-translate-y-1 transition-all text-center">View Our Work</a>
+                <a href="#showcase" class="px-8 py-4 bg-slate-900 text-white rounded-xl font-bold text-lg shadow-xl shadow-slate-200 hover:-translate-y-1 transition-all text-center">View Our Work</a>
                 <a href="#contact" class="px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-xl font-bold text-lg hover:bg-slate-50 transition-all text-center">Request a Quote</a>
             </div>
         </section>
@@ -63,62 +63,87 @@ const images = import.meta.glob('/src/assets/SampleRenders/*.{jpeg,jpg,png,gif,w
             </div>
         </section>
 
-        <section id="portfolio" class="max-w-7xl mx-auto px-6 mb-32">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {Object.entries(images).map(([path, importImage]) => (
-                  <div class="relative group overflow-hidden rounded-2xl bg-slate-200 aspect-[16/10] shadow-lg">
+        <section id="showcase" class="max-w-7xl mx-auto px-6 mb-32">
+			<div class="mb-12 border-l-4 border-blue-600 pl-6">
+				<h2 class="text-4xl font-black text-slate-900 tracking-tight uppercase">
+					Project Showcase
+				</h2>
+				<p class="text-lg text-slate-500 mt-2">
+					A gallery of our recent architectural visualizations and precision 3D floor plans.
+				</p>
+			</div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {Object.entries(images).map(([path, importImage], index) => (
+                  <div 
+                    class="relative group overflow-hidden rounded-2xl bg-slate-200 aspect-[16/10] shadow-lg cursor-zoom-in"
+                    onclick={`window.openGallery(${index})`}
+                  >
                     <Image 
                       src={importImage()} 
                       alt="Precision 3D Floor Plan Render" 
-                      class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
+                      class="gallery-thumb object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                     />
+                    <div class="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="bg-white/90 text-slate-900 px-4 py-2 rounded-full text-sm font-bold shadow-xl">Expand View</span>
+                    </div>
                   </div>
                 ))}
             </div>
         </section>
 
+        <div id="lightbox" class="fixed inset-0 z-[100] hidden backdrop-blur-md bg-white/10 flex items-center justify-center p-4 md:p-12 select-none" onclick="window.closeGallery()">
+            <button class="absolute top-6 right-8 bg-slate-900/10 hover:bg-slate-900/20 text-slate-900 w-12 h-12 rounded-full flex items-center justify-center transition-all z-[110]" onclick="window.closeGallery()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            
+            <button class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-slate-900/30 hover:text-slate-900 text-4xl p-4 transition-all" onclick="event.stopPropagation(); window.changeImage(-1)">&#8592;</button>
+            <button class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-slate-900/30 hover:text-slate-900 text-4xl p-4 transition-all" onclick="event.stopPropagation(); window.changeImage(1)">&#8594;</button>
+
+            <div class="relative max-w-full max-h-full flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+                <img id="lightbox-img" src="" class="max-w-full max-h-[85vh] rounded-lg shadow-2xl transition-transform duration-300 scale-95 object-contain" />
+                
+                <div class="absolute bottom-6 left-6 pointer-events-none">
+                    <span class="text-sm md:text-base font-bold tracking-tighter text-slate-800 bg-white/60 backdrop-blur-sm px-3 py-1 rounded-md">
+                        3DFLOORPLANS<span class="text-blue-600">.COM.AU</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div id="gallery-counter" class="absolute bottom-8 text-slate-900/40 font-mono text-sm tracking-widest">01 / 00</div>
+        </div>
+
         <section id="contact" class="max-w-4xl mx-auto px-6 mb-32 text-slate-900">
             <div class="bg-blue-600 rounded-[2rem] p-12 text-center text-white relative overflow-hidden">
                 <div id="form-container">
                     <h2 class="text-4xl font-bold mb-4">Request a Quote</h2>
-                    <p class="text-blue-100 mb-10 text-lg"></p>
-    
                     <form id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
                         <div class="md:col-span-1 space-y-2">
                             <label class="text-sm font-medium ml-1 text-white">Full Name</label>
-                            <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-blue-200 focus:outline-none" placeholder="John Citizen">
+                            <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-blue-200 focus:outline-none focus:bg-white/20" placeholder="John Citizen">
                         </div>
                         <div class="md:col-span-1 space-y-2">
                             <label class="text-sm font-medium ml-1 text-white">Email Address</label>
-                            <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-blue-200 focus:outline-none" placeholder="john@example.com">
+                            <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-blue-200 focus:outline-none focus:bg-white/20" placeholder="john@example.com">
                         </div>
-                        
                         <div class="md:col-span-2 space-y-2">
                             <label class="text-sm font-medium ml-1 text-white">Upload 2D floor plans or supporting documents (PDF, JPG, PNG)</label>
                             <input type="file" name="blueprint" accept=".pdf,.jpg,.jpeg,.png" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-dashed border-white/30 text-white text-sm cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-white file:text-blue-600" />
                         </div>
                         <div class="md:col-span-2 space-y-2">
                             <label class="text-sm font-medium ml-1 text-white">Project Details</label>
-                            <textarea name="message" rows="4" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-blue-200 focus:outline-none" placeholder="e.g. 2-bedroom apartment in Sydney..."></textarea>
+                            <textarea name="message" rows="4" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-blue-200 focus:outline-none focus:bg-white/20" placeholder="e.g. 2-bedroom apartment in Sydney..."></textarea>
                         </div>
-
                         <div id="form-status" class="md:col-span-2 hidden p-4 rounded-xl font-bold text-center text-sm"></div>
-                        
-                        <button type="submit" id="submit-btn" class="md:col-span-2 mt-4 bg-white text-blue-600 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition-all active:scale-95 shadow-lg">
-                            Request Quote
-                        </button>
+                        <button type="submit" id="submit-btn" class="md:col-span-2 mt-4 bg-white text-blue-600 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition-all active:scale-95 shadow-lg">Request Quote</button>
                     </form>
                 </div>
-
                 <div id="success-container" class="hidden py-12">
                     <div class="w-20 h-20 bg-white/20 text-white rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">✓</div>
                     <h2 class="text-4xl font-bold mb-4">Request Sent!</h2>
-                    <p class="text-blue-100 mb-10 text-lg leading-relaxed">
-                        Your request will be reviewed shortly.
-                    </p>
-                    <button id="reset-btn" class="bg-white text-blue-600 px-8 py-3 rounded-xl font-bold hover:bg-blue-50 transition shadow-lg">
-                        Submit Another
-                    </button>
+                    <button id="reset-btn" class="bg-white text-blue-600 px-8 py-3 rounded-xl font-bold hover:bg-blue-50 transition shadow-lg">Submit Another</button>
                 </div>
             </div>
         </section>
@@ -136,47 +161,72 @@ const images = import.meta.glob('/src/assets/SampleRenders/*.{jpeg,jpg,png,gif,w
 </Layout>
 
 <script is:inline>
+    let currentIdx = 0;
+    const allImages = Array.from(document.querySelectorAll('.gallery-thumb')).map(img => img.src);
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const counter = document.getElementById('gallery-counter');
+
+    window.openGallery = (index) => {
+        currentIdx = index;
+        updateLightbox();
+        lightbox.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => lightboxImg.classList.replace('scale-95', 'scale-100'), 10);
+    };
+
+    window.changeImage = (step) => {
+        currentIdx = (currentIdx + step + allImages.length) % allImages.length;
+        updateLightbox();
+    };
+
+    window.closeGallery = () => {
+        lightboxImg.classList.replace('scale-100', 'scale-95');
+        setTimeout(() => {
+            lightbox.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }, 200);
+    };
+
+    function updateLightbox() {
+        lightboxImg.src = allImages[currentIdx];
+        counter.innerText = `${String(currentIdx + 1).padStart(2, '0')} / ${String(allImages.length).padStart(2, '0')}`;
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (lightbox.classList.contains('hidden')) return;
+        if (e.key === 'ArrowRight') window.changeImage(1);
+        if (e.key === 'ArrowLeft') window.changeImage(-1);
+        if (e.key === 'Escape') window.closeGallery();
+    });
+
     const form = document.getElementById('contact-form');
     const btn = document.getElementById('submit-btn');
-    const status = document.getElementById('form-status');
     const formContainer = document.getElementById('form-container');
     const successContainer = document.getElementById('success-container');
-    const resetBtn = document.getElementById('reset-btn');
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         btn.disabled = true;
-        btn.innerText = "Sending request...";
-
+        btn.innerText = "Processing...";
         const formData = new FormData(form);
-
         try {
-            // Pointing to your custom Astro API route
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                body: formData
-            });
-
+            const response = await fetch('/api/contact', { method: 'POST', body: formData });
             if (response.ok) {
                 formContainer.classList.add('hidden');
                 successContainer.classList.remove('hidden');
                 form.reset();
-            } else {
-                throw new Error('Server error');
             }
         } catch (err) {
-            status.innerText = "Upload failed. Please check file size or try again.";
-            status.classList.remove('hidden');
-            status.classList.add('bg-red-500/20', 'text-red-100');
+            btn.innerText = "Error. Try again?";
             btn.disabled = false;
-            btn.innerText = "Submit for Review";
         }
     });
 
-    resetBtn.addEventListener('click', () => {
+    document.getElementById('reset-btn').onclick = () => {
         successContainer.classList.add('hidden');
         formContainer.classList.remove('hidden');
         btn.disabled = false;
-        btn.innerText = "Submit for Review";
-    });
+        btn.innerText = "Request Quote";
+    };
 </script>

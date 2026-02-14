@@ -1,0 +1,26 @@
+<div class="w-full h-32 flex items-center justify-center bg-slate-50 rounded-xl border border-dashed border-slate-200 overflow-hidden">
+    <svg viewBox="0 0 800 100" class="w-full h-full">
+      <path 
+        id="squiggle"
+        d="M0,50 C100,20 150,80 250,50 C350,20 400,80 500,50 C600,20 650,80 800,50" 
+        fill="none" 
+        stroke="#2563eb" 
+        stroke-width="3" 
+        stroke-linecap="round"
+      />
+    </svg>
+  </div>
+  
+  <style>
+    #squiggle {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: draw 4s linear infinite;
+    }
+  
+    @keyframes draw {
+      0% { stroke-dashoffset: 1000; }
+      50% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -1000; }
+    }
+  </style>
