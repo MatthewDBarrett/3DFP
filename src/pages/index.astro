@@ -4,9 +4,9 @@ import { Image } from 'astro:assets';
 
 const images = import.meta.glob('/src/assets/SampleRenders/*.{jpeg,jpg,png,gif,webp}');
 
-// SEO Metadata (Hidden from view)
+// SEO Metadata
 const title = "3D Floor Plans | Engineer-Led Architectural Modeling Sydney";
-const description = "Transforming 2D blueprints into photorealistic 3D experiences for Sydney architects and real estate agents. 100% scale accuracy with 4K renders.";
+const description = "Transforming 2D blueprints into photorealistic 3D experiences for Sydney architects and real estate agents. 2-3 day turnaround starting from $200.";
 ---
 
 <Layout title={title}>
@@ -24,7 +24,8 @@ const description = "Transforming 2D blueprints into photorealistic 3D experienc
             "addressCountry": "AU"
           },
           "description": "Engineer-led 3D floor plan conversion and architectural visualization in Sydney.",
-          "areaServed": "Sydney, NSW"
+          "areaServed": "Sydney, NSW",
+          "priceRange": "$200+"
         }
         </script>
     </head>
@@ -67,7 +68,7 @@ const description = "Transforming 2D blueprints into photorealistic 3D experienc
         <section class="bg-white border-y border-slate-200 py-12 mb-24">
             <div class="max-w-7xl mx-auto px-6 flex flex-wrap md:grid md:grid-cols-4 justify-center gap-8 text-center">
                 <div>
-                    <p class="text-3xl font-bold text-slate-900">3-4 days</p>
+                    <p class="text-3xl font-bold text-slate-900">2-3 days</p>
                     <p class="text-sm text-slate-500 uppercase tracking-widest mt-1">Typical Turnaround</p>
                 </div>
                 <div>
@@ -79,8 +80,8 @@ const description = "Transforming 2D blueprints into photorealistic 3D experienc
                     <p class="text-sm text-slate-500 uppercase tracking-widest mt-1">Render Quality</p>
                 </div>
                 <div>
-                    <p class="text-3xl font-bold text-slate-900">AU</p>
-                    <p class="text-sm text-slate-500 uppercase tracking-widest mt-1">Direct Support</p>
+                    <p class="text-3xl font-bold text-slate-900">From $200</p>
+                    <p class="text-sm text-slate-500 uppercase tracking-widest mt-1">Per Floor Plan</p>
                 </div>
             </div>
         </section>
@@ -183,8 +184,8 @@ const description = "Transforming 2D blueprints into photorealistic 3D experienc
         
                         <div class="relative pl-14">
                             <div class="absolute left-0 top-1 w-10 h-10 bg-slate-800 border border-slate-700 rounded-full flex items-center justify-center text-sm font-bold">2</div>
-                            <h4 class="font-bold text-xl mb-1 text-white">Initial Draft (3-4 Days)</h4>
-                            <p class="text-slate-400 leading-relaxed">We deliver a 3D draft within 3 to 4 business days. This allows you to visualize the spatial layout and provide initial feedback.</p>
+                            <h4 class="font-bold text-xl mb-1 text-white">Initial Draft (2-3 Days)</h4>
+                            <p class="text-slate-400 leading-relaxed">Starting from $200 per floor plan. We deliver a 3D draft within 2 to 3 business days, allowing you to visualize the spatial layout quickly.</p>
                         </div>
         
                         <div class="relative pl-14">
